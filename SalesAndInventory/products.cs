@@ -10,25 +10,22 @@ using System.Windows.Forms;
 
 namespace SalesAndInventory
 {
-    public partial class sales : Form
+    public partial class products : Form
     {
         private Form currentForm;
-
-        public sales()
+        private DatabaseConnector dbConnector;
+        public products()
         {
             InitializeComponent();
+            // Initialize the currentForm with the initial form 
             currentForm = this;
             currentForm.Show();
         }
 
         private void SwitchForm(Form newForm)
         {
-            // Center the new form relative to the main form
+            // Set the location of the new form to match the main form
             newForm.Location = this.Location;
-
-
-            // Set the main form as the owner of the new form
-            newForm.Owner = this;
 
             // Hide the current form
             currentForm.Hide();
@@ -39,6 +36,7 @@ namespace SalesAndInventory
             // Update the currentForm reference
             currentForm = newForm;
         }
+
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
@@ -63,6 +61,21 @@ namespace SalesAndInventory
         private void button1_Click(object sender, EventArgs e)
         {
             SwitchForm(new products());
+        }
+
+        private void addcolorways_Click(object sender, EventArgs e)
+        {
+            SwitchForm(new productscolorway());
+        }
+
+        private void addshoes_Click(object sender, EventArgs e)
+        {
+            SwitchForm(new productsshoes());
+        }
+
+        private void editexisting_Click(object sender, EventArgs e)
+        {
+            SwitchForm(new productsedit());
         }
     }
 }

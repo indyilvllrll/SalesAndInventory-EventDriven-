@@ -59,5 +59,10 @@ namespace SalesAndInventory
         {
             SwitchForm(new purchases());
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SwitchForm(new products());
+        }
     }
 }

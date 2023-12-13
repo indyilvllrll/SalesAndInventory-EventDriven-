@@ -149,5 +149,10 @@ namespace SalesAndInventory
             inventorysubForm.Location = this.Location;
             inventorysubForm.Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SwitchForm(new products());
+        }
     }
 }

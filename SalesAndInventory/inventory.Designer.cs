@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             dataGridView1 = new DataGridView();
             panelMain = new Panel();
             btnPurchases = new Button();
@@ -36,6 +36,7 @@
             btnInventory = new Button();
             btnDashboard = new Button();
             btnUpdateStocks = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panelMain.SuspendLayout();
             SuspendLayout();
@@ -49,14 +50,14 @@
             dataGridView1.Location = new Point(439, 138);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.ActiveCaption;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.ActiveCaption;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(544, 275);
             dataGridView1.TabIndex = 0;
@@ -64,6 +65,7 @@
             // panelMain
             // 
             panelMain.BackColor = Color.Sienna;
+            panelMain.Controls.Add(button1);
             panelMain.Controls.Add(btnPurchases);
             panelMain.Controls.Add(btnSales);
             panelMain.Controls.Add(btnInventory);
@@ -129,6 +131,17 @@
             btnUpdateStocks.UseVisualStyleBackColor = false;
             btnUpdateStocks.Click += btnUpdateStocks_Click;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.SandyBrown;
+            button1.Location = new Point(36, 345);
+            button1.Name = "button1";
+            button1.Size = new Size(96, 36);
+            button1.TabIndex = 5;
+            button1.Text = "Products";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // inventory
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -159,5 +172,6 @@
         private Button btnPurchases;
         private Button btnSales;
         private Button btnUpdateStocks;
+        private Button button1;
     }
 }

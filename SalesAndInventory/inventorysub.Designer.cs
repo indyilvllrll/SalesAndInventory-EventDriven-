@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panelMain = new Panel();
+            button1 = new Button();
             btnPurchases = new Button();
             btnSales = new Button();
             btnInventory = new Button();
@@ -41,8 +42,8 @@
             shoeslabel = new Label();
             colorway = new Label();
             panel1 = new Panel();
-            btnUpdateStocks = new Button();
             textBox1 = new TextBox();
+            btnUpdateStocks = new Button();
             panelMain.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -50,6 +51,7 @@
             // panelMain
             // 
             panelMain.BackColor = Color.Sienna;
+            panelMain.Controls.Add(button1);
             panelMain.Controls.Add(btnPurchases);
             panelMain.Controls.Add(btnSales);
             panelMain.Controls.Add(btnInventory);
@@ -58,6 +60,17 @@
             panelMain.Name = "panelMain";
             panelMain.Size = new Size(169, 660);
             panelMain.TabIndex = 2;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.SandyBrown;
+            button1.Location = new Point(36, 348);
+            button1.Name = "button1";
+            button1.Size = new Size(96, 36);
+            button1.TabIndex = 4;
+            button1.Text = "Products";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // btnPurchases
             // 
@@ -121,6 +134,7 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(136, 23);
             comboBox1.TabIndex = 5;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -141,12 +155,13 @@
             listBox1.Name = "listBox1";
             listBox1.Size = new Size(136, 213);
             listBox1.TabIndex = 7;
+            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // colorwaycmb
             // 
             colorwaycmb.Font = new Font("Sitka Small", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             colorwaycmb.FormattingEnabled = true;
-            colorwaycmb.Location = new Point(650, 131);
+            colorwaycmb.Location = new Point(586, 131);
             colorwaycmb.Name = "colorwaycmb";
             colorwaycmb.Size = new Size(187, 31);
             colorwaycmb.TabIndex = 8;
@@ -155,7 +170,7 @@
             // 
             shoeslabel.AutoSize = true;
             shoeslabel.Font = new Font("Sitka Text", 24F, FontStyle.Bold, GraphicsUnit.Point);
-            shoeslabel.Location = new Point(680, 72);
+            shoeslabel.Location = new Point(616, 72);
             shoeslabel.Name = "shoeslabel";
             shoeslabel.Size = new Size(129, 47);
             shoeslabel.TabIndex = 9;
@@ -165,7 +180,7 @@
             // 
             colorway.AutoSize = true;
             colorway.Font = new Font("Sitka Text", 12F, FontStyle.Italic, GraphicsUnit.Point);
-            colorway.Location = new Point(558, 134);
+            colorway.Location = new Point(494, 134);
             colorway.Name = "colorway";
             colorway.Size = new Size(78, 23);
             colorway.TabIndex = 10;
@@ -175,30 +190,30 @@
             // 
             panel1.BackColor = Color.PeachPuff;
             panel1.Controls.Add(textBox1);
-            panel1.Location = new Point(482, 212);
+            panel1.Location = new Point(418, 212);
             panel1.Name = "panel1";
             panel1.Size = new Size(489, 215);
             panel1.TabIndex = 11;
+            // 
+            // textBox1
+            // 
+            textBox1.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            textBox1.Location = new Point(37, 27);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(42, 24);
+            textBox1.TabIndex = 0;
             // 
             // btnUpdateStocks
             // 
             btnUpdateStocks.BackColor = Color.Coral;
             btnUpdateStocks.Font = new Font("Sitka Banner", 9.749999F, FontStyle.Regular, GraphicsUnit.Point);
-            btnUpdateStocks.Location = new Point(661, 472);
+            btnUpdateStocks.Location = new Point(597, 472);
             btnUpdateStocks.Name = "btnUpdateStocks";
             btnUpdateStocks.Size = new Size(162, 36);
             btnUpdateStocks.TabIndex = 12;
             btnUpdateStocks.Text = "UPDATE STOCKS";
             btnUpdateStocks.UseVisualStyleBackColor = false;
             btnUpdateStocks.Click += btnUpdateStocks_Click;
-            // 
-            // textBox1
-            // 
-            textBox1.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(74, 40);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(42, 24);
-            textBox1.TabIndex = 0;
             // 
             // inventorysub
             // 
@@ -241,5 +256,6 @@
         private Panel panel1;
         private Button btnUpdateStocks;
         private TextBox textBox1;
+        private Button button1;
     }
 }

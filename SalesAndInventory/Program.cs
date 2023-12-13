@@ -1,3 +1,5 @@
+using MySql.Data.MySqlClient;
+
 namespace SalesAndInventory
 {
     internal static class Program

@@ -1,6 +1,6 @@
 ﻿namespace SalesAndInventory
 {
-    partial class sales
+    partial class productsedit
     {
         /// <summary>
         /// Required designer variable.
@@ -28,27 +28,86 @@
         /// </summary>
         private void InitializeComponent()
         {
+            back = new Button();
+            editexisting = new Button();
+            addshoes = new Button();
+            addcolorways = new Button();
             panelMain = new Panel();
+            button2 = new Button();
             btnPurchases = new Button();
             btnSales = new Button();
             btnInventory = new Button();
             btnDashboard = new Button();
-            button1 = new Button();
             panelMain.SuspendLayout();
             SuspendLayout();
+            // 
+            // back
+            // 
+            back.BackColor = Color.MistyRose;
+            back.Location = new Point(275, 57);
+            back.Name = "back";
+            back.Size = new Size(54, 20);
+            back.TabIndex = 23;
+            back.Text = "back";
+            back.UseVisualStyleBackColor = false;
+            back.Click += back_Click;
+            // 
+            // editexisting
+            // 
+            editexisting.BackColor = Color.Salmon;
+            editexisting.Location = new Point(828, 50);
+            editexisting.Name = "editexisting";
+            editexisting.Size = new Size(115, 36);
+            editexisting.TabIndex = 22;
+            editexisting.Text = "Edit Existing Shoes";
+            editexisting.UseVisualStyleBackColor = false;
+            editexisting.Click += editexisting_Click;
+            // 
+            // addshoes
+            // 
+            addshoes.BackColor = Color.SandyBrown;
+            addshoes.Location = new Point(428, 49);
+            addshoes.Name = "addshoes";
+            addshoes.Size = new Size(121, 36);
+            addshoes.TabIndex = 21;
+            addshoes.Text = "Add New Shoes";
+            addshoes.UseVisualStyleBackColor = false;
+            addshoes.Click += addshoes_Click;
+            // 
+            // addcolorways
+            // 
+            addcolorways.BackColor = Color.SandyBrown;
+            addcolorways.Location = new Point(628, 50);
+            addcolorways.Name = "addcolorways";
+            addcolorways.Size = new Size(128, 36);
+            addcolorways.TabIndex = 20;
+            addcolorways.Text = "Add New Colorways";
+            addcolorways.UseVisualStyleBackColor = false;
+            addcolorways.Click += addcolorways_Click;
             // 
             // panelMain
             // 
             panelMain.BackColor = Color.Sienna;
-            panelMain.Controls.Add(button1);
+            panelMain.Controls.Add(button2);
             panelMain.Controls.Add(btnPurchases);
             panelMain.Controls.Add(btnSales);
             panelMain.Controls.Add(btnInventory);
             panelMain.Controls.Add(btnDashboard);
-            panelMain.Location = new Point(1, 2);
+            panelMain.Location = new Point(3, 0);
             panelMain.Name = "panelMain";
             panelMain.Size = new Size(169, 661);
-            panelMain.TabIndex = 3;
+            panelMain.TabIndex = 18;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.Salmon;
+            button2.Location = new Point(36, 349);
+            button2.Name = "button2";
+            button2.Size = new Size(96, 36);
+            button2.TabIndex = 14;
+            button2.Text = "Products";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // btnPurchases
             // 
@@ -63,7 +122,7 @@
             // 
             // btnSales
             // 
-            btnSales.BackColor = Color.Salmon;
+            btnSales.BackColor = Color.SandyBrown;
             btnSales.Location = new Point(36, 227);
             btnSales.Name = "btnSales";
             btnSales.Size = new Size(96, 36);
@@ -94,36 +153,33 @@
             btnDashboard.UseVisualStyleBackColor = false;
             btnDashboard.Click += btnDashboard_Click;
             // 
-            // button1
-            // 
-            button1.BackColor = Color.SandyBrown;
-            button1.Location = new Point(36, 346);
-            button1.Name = "button1";
-            button1.Size = new Size(96, 36);
-            button1.TabIndex = 6;
-            button1.Text = "Products";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
-            // 
-            // sales
+            // productsedit
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1154, 659);
+            Controls.Add(back);
+            Controls.Add(editexisting);
+            Controls.Add(addshoes);
+            Controls.Add(addcolorways);
             Controls.Add(panelMain);
-            Name = "sales";
-            Text = "sales";
+            Name = "productsedit";
+            Text = "editexisting";
             panelMain.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
+        private Button back;
+        private Button editexisting;
+        private Button addshoes;
+        private Button addcolorways;
         private Panel panelMain;
+        private Button button2;
         private Button btnPurchases;
         private Button btnSales;
         private Button btnInventory;
         private Button btnDashboard;
-        private Button button1;
     }
 }

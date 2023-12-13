@@ -33,12 +33,14 @@
             btnSales = new Button();
             btnInventory = new Button();
             btnDashboard = new Button();
+            button1 = new Button();
             panelMain.SuspendLayout();
             SuspendLayout();
             // 
             // panelMain
             // 
             panelMain.BackColor = Color.Sienna;
+            panelMain.Controls.Add(button1);
             panelMain.Controls.Add(btnPurchases);
             panelMain.Controls.Add(btnSales);
             panelMain.Controls.Add(btnInventory);
@@ -92,6 +94,17 @@
             btnDashboard.UseVisualStyleBackColor = false;
             btnDashboard.Click += btnDashboard_Click;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.SandyBrown;
+            button1.Location = new Point(36, 345);
+            button1.Name = "button1";
+            button1.Size = new Size(96, 36);
+            button1.TabIndex = 6;
+            button1.Text = "Products";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -111,5 +124,6 @@
         private Button btnSales;
         private Button btnInventory;
         private Button btnDashboard;
+        private Button button1;
     }
 }
