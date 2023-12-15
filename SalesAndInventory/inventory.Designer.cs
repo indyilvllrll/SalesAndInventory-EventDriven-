@@ -32,11 +32,16 @@
             dataGridView1 = new DataGridView();
             panelMain = new Panel();
             button1 = new Button();
-            btnPurchases = new Button();
             btnSales = new Button();
             btnInventory = new Button();
             btnDashboard = new Button();
             btnUpdateStocks = new Button();
+            label2 = new Label();
+            label1 = new Label();
+            listBox2 = new ListBox();
+            listBox1 = new ListBox();
+            brandcmb = new ComboBox();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panelMain.SuspendLayout();
             SuspendLayout();
@@ -47,7 +52,7 @@
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.GridColor = SystemColors.ButtonHighlight;
-            dataGridView1.Location = new Point(439, 138);
+            dataGridView1.Location = new Point(527, 151);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -67,7 +72,6 @@
             // 
             panelMain.BackColor = Color.Sienna;
             panelMain.Controls.Add(button1);
-            panelMain.Controls.Add(btnPurchases);
             panelMain.Controls.Add(btnSales);
             panelMain.Controls.Add(btnInventory);
             panelMain.Controls.Add(btnDashboard);
@@ -79,24 +83,13 @@
             // button1
             // 
             button1.BackColor = Color.SandyBrown;
-            button1.Location = new Point(36, 345);
+            button1.Location = new Point(36, 289);
             button1.Name = "button1";
             button1.Size = new Size(96, 36);
             button1.TabIndex = 5;
             button1.Text = "Products";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
-            // 
-            // btnPurchases
-            // 
-            btnPurchases.BackColor = Color.SandyBrown;
-            btnPurchases.Location = new Point(36, 287);
-            btnPurchases.Name = "btnPurchases";
-            btnPurchases.Size = new Size(96, 36);
-            btnPurchases.TabIndex = 3;
-            btnPurchases.Text = "Purchases";
-            btnPurchases.UseVisualStyleBackColor = false;
-            btnPurchases.Click += btnPurchases_Click;
             // 
             // btnSales
             // 
@@ -135,7 +128,7 @@
             // btnUpdateStocks
             // 
             btnUpdateStocks.BackColor = Color.PeachPuff;
-            btnUpdateStocks.Location = new Point(812, 79);
+            btnUpdateStocks.Location = new Point(900, 92);
             btnUpdateStocks.Name = "btnUpdateStocks";
             btnUpdateStocks.Size = new Size(171, 36);
             btnUpdateStocks.TabIndex = 4;
@@ -143,11 +136,73 @@
             btnUpdateStocks.UseVisualStyleBackColor = false;
             btnUpdateStocks.Click += btnUpdateStocks_Click;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(253, 187);
+            label2.Name = "label2";
+            label2.Size = new Size(43, 15);
+            label2.TabIndex = 13;
+            label2.Text = "SHOES";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(250, 122);
+            label1.Name = "label1";
+            label1.Size = new Size(46, 15);
+            label1.TabIndex = 12;
+            label1.Text = "BRAND";
+            // 
+            // listBox2
+            // 
+            listBox2.FormattingEnabled = true;
+            listBox2.ItemHeight = 15;
+            listBox2.Location = new Point(353, 212);
+            listBox2.Name = "listBox2";
+            listBox2.Size = new Size(138, 214);
+            listBox2.TabIndex = 11;
+            listBox2.SelectedIndexChanged += listBox2_SelectedIndexChanged;
+            // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(215, 212);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(132, 214);
+            listBox1.TabIndex = 10;
+            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
+            // 
+            // brandcmb
+            // 
+            brandcmb.FormattingEnabled = true;
+            brandcmb.Location = new Point(215, 151);
+            brandcmb.Name = "brandcmb";
+            brandcmb.Size = new Size(132, 23);
+            brandcmb.TabIndex = 14;
+            brandcmb.SelectedIndexChanged += brandcmb_SelectedIndexChanged;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(389, 187);
+            label3.Name = "label3";
+            label3.Size = new Size(71, 15);
+            label3.TabIndex = 15;
+            label3.Text = "COLORWAY";
+            // 
             // inventory
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1154, 659);
+            Controls.Add(label3);
+            Controls.Add(brandcmb);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(listBox2);
+            Controls.Add(listBox1);
             Controls.Add(btnUpdateStocks);
             Controls.Add(panelMain);
             Controls.Add(dataGridView1);
@@ -157,6 +212,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panelMain.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -170,9 +226,14 @@
         private Panel panelMain;
         private Button btnInventory;
         private Button btnDashboard;
-        private Button btnPurchases;
         private Button btnSales;
         private Button btnUpdateStocks;
         private Button button1;
+        private Label label2;
+        private Label label1;
+        private ListBox listBox2;
+        private ListBox listBox1;
+        private ComboBox brandcmb;
+        private Label label3;
     }
 }

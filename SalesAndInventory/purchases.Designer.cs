@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             panelMain = new Panel();
-            btnPurchases = new Button();
+            button1 = new Button();
             btnSales = new Button();
             btnInventory = new Button();
             btnDashboard = new Button();
-            button1 = new Button();
             panelMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -41,7 +40,6 @@
             // 
             panelMain.BackColor = Color.Sienna;
             panelMain.Controls.Add(button1);
-            panelMain.Controls.Add(btnPurchases);
             panelMain.Controls.Add(btnSales);
             panelMain.Controls.Add(btnInventory);
             panelMain.Controls.Add(btnDashboard);
@@ -50,16 +48,16 @@
             panelMain.Size = new Size(169, 661);
             panelMain.TabIndex = 3;
             // 
-            // btnPurchases
+            // button1
             // 
-            btnPurchases.BackColor = Color.Salmon;
-            btnPurchases.Location = new Point(36, 287);
-            btnPurchases.Name = "btnPurchases";
-            btnPurchases.Size = new Size(96, 36);
-            btnPurchases.TabIndex = 3;
-            btnPurchases.Text = "Purchases";
-            btnPurchases.UseVisualStyleBackColor = false;
-            btnPurchases.Click += btnPurchases_Click;
+            button1.BackColor = Color.SandyBrown;
+            button1.Location = new Point(36, 347);
+            button1.Name = "button1";
+            button1.Size = new Size(96, 36);
+            button1.TabIndex = 6;
+            button1.Text = "Products";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // btnSales
             // 
@@ -94,17 +92,6 @@
             btnDashboard.UseVisualStyleBackColor = false;
             btnDashboard.Click += btnDashboard_Click;
             // 
-            // button1
-            // 
-            button1.BackColor = Color.SandyBrown;
-            button1.Location = new Point(36, 347);
-            button1.Name = "button1";
-            button1.Size = new Size(96, 36);
-            button1.TabIndex = 6;
-            button1.Text = "Products";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
-            // 
             // purchases
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -120,7 +107,6 @@
         #endregion
 
         private Panel panelMain;
-        private Button btnPurchases;
         private Button btnSales;
         private Button btnInventory;
         private Button btnDashboard;

@@ -30,7 +30,6 @@
         {
             panelMain = new Panel();
             button1 = new Button();
-            btnPurchases = new Button();
             btnSales = new Button();
             btnInventory = new Button();
             btnDashboard = new Button();
@@ -38,15 +37,6 @@
             button2 = new Button();
             tabPage2 = new TabPage();
             dataGridView2 = new DataGridView();
-            Column7 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
-            Column8 = new DataGridViewTextBoxColumn();
             tabPage1 = new TabPage();
             dataGridView1 = new DataGridView();
             tabControl1 = new TabControl();
@@ -62,7 +52,6 @@
             // 
             panelMain.BackColor = Color.Sienna;
             panelMain.Controls.Add(button1);
-            panelMain.Controls.Add(btnPurchases);
             panelMain.Controls.Add(btnSales);
             panelMain.Controls.Add(btnInventory);
             panelMain.Controls.Add(btnDashboard);
@@ -74,24 +63,13 @@
             // button1
             // 
             button1.BackColor = Color.SandyBrown;
-            button1.Location = new Point(36, 346);
+            button1.Location = new Point(36, 289);
             button1.Name = "button1";
             button1.Size = new Size(96, 36);
             button1.TabIndex = 6;
             button1.Text = "Products";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click_1;
-            // 
-            // btnPurchases
-            // 
-            btnPurchases.BackColor = Color.SandyBrown;
-            btnPurchases.Location = new Point(36, 287);
-            btnPurchases.Name = "btnPurchases";
-            btnPurchases.Size = new Size(96, 36);
-            btnPurchases.TabIndex = 3;
-            btnPurchases.Text = "Purchases";
-            btnPurchases.UseVisualStyleBackColor = false;
-            btnPurchases.Click += btnPurchases_Click;
             // 
             // btnSales
             // 
@@ -162,57 +140,11 @@
             // dataGridView2
             // 
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { Column7, dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7, Column8 });
             dataGridView2.Location = new Point(6, 6);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowTemplate.Height = 25;
             dataGridView2.Size = new Size(738, 312);
             dataGridView2.TabIndex = 1;
-            // 
-            // Column7
-            // 
-            Column7.HeaderText = "Order ID";
-            Column7.Name = "Column7";
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            dataGridViewTextBoxColumn1.HeaderText = "Customer ID";
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.HeaderText = "First Name";
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.HeaderText = "Last Name";
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            dataGridViewTextBoxColumn4.HeaderText = "Order List";
-            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            dataGridViewTextBoxColumn5.HeaderText = "Courier";
-            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            dataGridViewTextBoxColumn6.HeaderText = "Payment ";
-            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            dataGridViewTextBoxColumn7.HeaderText = "Total";
-            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            // 
-            // Column8
-            // 
-            Column8.HeaderText = "Status";
-            Column8.Name = "Column8";
             // 
             // tabPage1
             // 
@@ -269,7 +201,6 @@
 
         private Panel panelMain;
         private Button button1;
-        private Button btnPurchases;
         private Button btnSales;
         private Button btnInventory;
         private Button btnDashboard;
@@ -280,14 +211,5 @@
         private DataGridView dataGridView1;
         private TabControl tabControl1;
         private DataGridView dataGridView2;
-        private DataGridViewTextBoxColumn Column7;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private DataGridViewTextBoxColumn Column8;
     }
 }

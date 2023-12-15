@@ -16,7 +16,7 @@ namespace SalesAndInventory
         private void Initialize()
         {
             server = "localhost";
-            database = "shoessalesandinventory";
+            database = "shoessalesandinventory1";
             uid = "shoessalesandinventory";
             password = "z7FP[-6kc@ErCAnI";
 

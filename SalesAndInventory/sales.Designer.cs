@@ -30,7 +30,6 @@
         {
             panelMain = new Panel();
             button1 = new Button();
-            btnPurchases = new Button();
             btnSales = new Button();
             btnInventory = new Button();
             btnDashboard = new Button();
@@ -68,10 +67,10 @@
             addbtn = new Button();
             clearlist = new Button();
             dataGridView1 = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
+            BrandColumn = new DataGridViewTextBoxColumn();
+            ProductNameColumn = new DataGridViewTextBoxColumn();
+            ColorwayColumn = new DataGridViewTextBoxColumn();
+            SizesColumn = new DataGridViewTextBoxColumn();
             Quantity = new DataGridViewTextBoxColumn();
             RetailPrice = new DataGridViewTextBoxColumn();
             panel1 = new Panel();
@@ -85,7 +84,7 @@
             totaltxtb = new TextBox();
             sizescmb = new ComboBox();
             label18 = new Label();
-            confirm = new Button();
+            confirmbtn = new Button();
             label22 = new Label();
             customercmb = new ComboBox();
             cleartxtb = new Button();
@@ -100,7 +99,6 @@
             // 
             panelMain.BackColor = Color.Sienna;
             panelMain.Controls.Add(button1);
-            panelMain.Controls.Add(btnPurchases);
             panelMain.Controls.Add(btnSales);
             panelMain.Controls.Add(btnInventory);
             panelMain.Controls.Add(btnDashboard);
@@ -112,24 +110,13 @@
             // button1
             // 
             button1.BackColor = Color.SandyBrown;
-            button1.Location = new Point(36, 346);
+            button1.Location = new Point(36, 295);
             button1.Name = "button1";
             button1.Size = new Size(96, 36);
             button1.TabIndex = 6;
             button1.Text = "Products";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
-            // 
-            // btnPurchases
-            // 
-            btnPurchases.BackColor = Color.SandyBrown;
-            btnPurchases.Location = new Point(36, 287);
-            btnPurchases.Name = "btnPurchases";
-            btnPurchases.Size = new Size(96, 36);
-            btnPurchases.TabIndex = 3;
-            btnPurchases.Text = "Purchases";
-            btnPurchases.UseVisualStyleBackColor = false;
-            btnPurchases.Click += btnPurchases_Click;
             // 
             // btnSales
             // 
@@ -452,36 +439,36 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Quantity, RetailPrice });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { BrandColumn, ProductNameColumn, ColorwayColumn, SizesColumn, Quantity, RetailPrice });
             dataGridView1.Location = new Point(516, 481);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(403, 150);
             dataGridView1.TabIndex = 40;
             // 
-            // Column1
+            // BrandColumn
             // 
-            Column1.HeaderText = "Brand";
-            Column1.Name = "Column1";
-            Column1.Width = 60;
+            BrandColumn.HeaderText = "Brand";
+            BrandColumn.Name = "BrandColumn";
+            BrandColumn.Width = 60;
             // 
-            // Column2
+            // ProductNameColumn
             // 
-            Column2.HeaderText = "Product Name";
-            Column2.Name = "Column2";
-            Column2.Width = 60;
+            ProductNameColumn.HeaderText = "Product Name";
+            ProductNameColumn.Name = "ProductNameColumn";
+            ProductNameColumn.Width = 60;
             // 
-            // Column3
+            // ColorwayColumn
             // 
-            Column3.HeaderText = "Colorway";
-            Column3.Name = "Column3";
-            Column3.Width = 60;
+            ColorwayColumn.HeaderText = "Colorway";
+            ColorwayColumn.Name = "ColorwayColumn";
+            ColorwayColumn.Width = 60;
             // 
-            // Column4
+            // SizesColumn
             // 
-            Column4.HeaderText = "Size";
-            Column4.Name = "Column4";
-            Column4.Width = 60;
+            SizesColumn.HeaderText = "Size";
+            SizesColumn.Name = "SizesColumn";
+            SizesColumn.Width = 60;
             // 
             // Quantity
             // 
@@ -600,14 +587,15 @@
             label18.TabIndex = 42;
             label18.Text = "Quantity";
             // 
-            // confirm
+            // confirmbtn
             // 
-            confirm.Location = new Point(965, 434);
-            confirm.Name = "confirm";
-            confirm.Size = new Size(109, 23);
-            confirm.TabIndex = 44;
-            confirm.Text = "Confirm Order";
-            confirm.UseVisualStyleBackColor = true;
+            confirmbtn.Location = new Point(965, 434);
+            confirmbtn.Name = "confirmbtn";
+            confirmbtn.Size = new Size(109, 23);
+            confirmbtn.TabIndex = 44;
+            confirmbtn.Text = "Confirm Order";
+            confirmbtn.UseVisualStyleBackColor = true;
+            confirmbtn.Click += confirmbtn_Click;
             // 
             // label22
             // 
@@ -655,7 +643,7 @@
             Controls.Add(cleartxtb);
             Controls.Add(customercmb);
             Controls.Add(label22);
-            Controls.Add(confirm);
+            Controls.Add(confirmbtn);
             Controls.Add(label18);
             Controls.Add(panel1);
             Controls.Add(dataGridView1);
@@ -709,7 +697,6 @@
         #endregion
 
         private Panel panelMain;
-        private Button btnPurchases;
         private Button btnSales;
         private Button btnInventory;
         private Button btnDashboard;
@@ -759,15 +746,15 @@
         private Button applybtn;
         private Label label21;
         private TextBox totaltxtb;
-        private Button confirm;
+        private Button confirmbtn;
         private Label label22;
         private ComboBox customercmb;
         private Button cleartxtb;
         private ComboBox quantitycmb;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column4;
+        private DataGridViewTextBoxColumn BrandColumn;
+        private DataGridViewTextBoxColumn ProductNameColumn;
+        private DataGridViewTextBoxColumn ColorwayColumn;
+        private DataGridViewTextBoxColumn SizesColumn;
         private DataGridViewTextBoxColumn Quantity;
         private DataGridViewTextBoxColumn RetailPrice;
     }

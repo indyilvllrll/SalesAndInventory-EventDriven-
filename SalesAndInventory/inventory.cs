@@ -1,31 +1,28 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Data;
+using System.Data.Common;
+using System.Windows.Forms;
 
 
 namespace SalesAndInventory
 {
     public partial class inventory : Form
     {
-        private MySqlConnection? connection;
-        private string? server, database, uid, password;
-        private string? connectionString;
+
         private Form currentForm;
+        private readonly DatabaseConnector dbConnector;
         public inventory()
         {
+            dbConnector = new DatabaseConnector("localhost", "shoessalesandinventory1", "shoessalesandinventory", "z7FP[-6kc@ErCAnI");
             InitializeComponent();
             Initialize();
-            InitializeDatabaseConnection();
             LoadData();
+            PopulateBrandComboBox();
+
         }
 
         private void Initialize()
         {
-            server = "localhost";
-            database = "shoessalesandinventory1";
-            uid = "shoessalesandinventory";
-            password = "z7FP[-6kc@ErCAnI";
-
-            connectionString = $"SERVER={server};DATABASE={database};UID={uid};PASSWORD={password};";
 
             // Initialize the currentForm with the initial form 
             currentForm = this;
@@ -33,21 +30,14 @@ namespace SalesAndInventory
 
         }
 
-        private void InitializeDatabaseConnection()
-        {
-            connection = new MySqlConnection(connectionString);
-            connection.Open();
-        }
+
 
         private void LoadData()
         {
-            if (connection is null || connection.State != ConnectionState.Open)
+            try
             {
-                _ = MessageBox.Show("Database connection is not open.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
-            string query = @"
+                string query = @"
         SELECT
             inventory.InventoryID,
             products_table.ProductName,
@@ -63,10 +53,9 @@ namespace SalesAndInventory
         JOIN
             sizes ON inventory.SizeID = sizes.SizeID;
     ";
+                using MySqlCommand command = new(query, dbConnector.GetConnection());
+                dbConnector.OpenConnection();
 
-            try
-            {
-                using MySqlCommand command = new(query, connection);
                 using MySqlDataAdapter adapter = new(command);
                 DataTable dataTable = new();
                 _ = adapter.Fill(dataTable);
@@ -148,8 +137,82 @@ namespace SalesAndInventory
 
         }
 
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateDataGridView();
+
+        }
+
+        private void UpdateDataGridView()
+        {
+            string selectedProductName = listBox1.Text;
+            string selectedColorway = listBox2.Text;
+
+            string strSQL = $"SELECT * FROM inventory " +
+                            $"JOIN products_table ON inventory.ProductID = products_table.ProductID " +
+                            $"JOIN colorway ON inventory.ColorwayID = colorway.ColorwayID " +
+                            $"JOIN sizes ON inventory.SizeID = sizes.SizeID " +
+                            $"WHERE products_table.ProductName = '{selectedProductName}' " +
+                            $"AND colorway.ColorwayName = '{selectedColorway}'";
+
+            DataTable dataTable = dbConnector.ExecuteQueryDataTable(strSQL);
+
+            dataGridView1.DataSource = dataTable;
+        }
+        private void PopulateBrandComboBox()
+        {
+            string strSQL = "SELECT DISTINCT Brand FROM products_table";
+            DataTable dataTable = dbConnector.ExecuteQueryDataTable(strSQL);
+
+            brandcmb.DataSource = dataTable;
+            brandcmb.DisplayMember = "Brand";
+        }
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedProductName = listBox1.Text;
+
+            // Populate listbox2 with ColorwayName based on the selected product name
+            PopulateColorwayListBox(selectedProductName);
+        }
 
 
+        private void PopulateColorwayListBox(string selectedProductName)
+        {
+            string strSQL = $"SELECT DISTINCT colorway.ColorwayName " +
+                            $"FROM inventory " +
+                            $"JOIN products_table ON inventory.ProductID = products_table.ProductID " +
+                            $"JOIN colorway ON inventory.ColorwayID = colorway.ColorwayID " +
+                            $"JOIN sizes ON inventory.SizeID = sizes.SizeID " +
+                            $"WHERE products_table.ProductName = '{selectedProductName}'";
+
+            DataTable dataTable = dbConnector.ExecuteQueryDataTable(strSQL);
+
+            listBox2.DataSource = dataTable;
+            listBox2.DisplayMember = "ColorwayName";
+        }
+
+        private void brandcmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedBrand = brandcmb.Text;
+
+            // Populate listbox1 with ProductName based on the selected brand
+            PopulateProductNameListBox(selectedBrand);
+        }
+
+        private void PopulateProductNameListBox(string selectedBrand)
+        {
+            string strSQL = $"SELECT DISTINCT products_table.ProductName " +
+                            $"FROM inventory " +
+                            $"JOIN products_table ON inventory.ProductID = products_table.ProductID " +
+                            $"JOIN colorway ON inventory.ColorwayID = colorway.ColorwayID " +
+                            $"JOIN sizes ON inventory.SizeID = sizes.SizeID " +
+                            $"WHERE products_table.Brand = '{selectedBrand}'";
+
+            DataTable dataTable = dbConnector.ExecuteQueryDataTable(strSQL);
+
+            listBox1.DataSource = dataTable;
+            listBox1.DisplayMember = "ProductName";
+        }
 
 
 

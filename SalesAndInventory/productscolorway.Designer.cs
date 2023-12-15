@@ -30,7 +30,6 @@
         {
             panelMain = new Panel();
             button2 = new Button();
-            btnPurchases = new Button();
             btnSales = new Button();
             btnInventory = new Button();
             btnDashboard = new Button();
@@ -54,7 +53,6 @@
             // 
             panelMain.BackColor = Color.Sienna;
             panelMain.Controls.Add(button2);
-            panelMain.Controls.Add(btnPurchases);
             panelMain.Controls.Add(btnSales);
             panelMain.Controls.Add(btnInventory);
             panelMain.Controls.Add(btnDashboard);
@@ -66,24 +64,13 @@
             // button2
             // 
             button2.BackColor = Color.Salmon;
-            button2.Location = new Point(36, 349);
+            button2.Location = new Point(36, 292);
             button2.Name = "button2";
             button2.Size = new Size(96, 36);
             button2.TabIndex = 14;
             button2.Text = "Products";
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
-            // 
-            // btnPurchases
-            // 
-            btnPurchases.BackColor = Color.SandyBrown;
-            btnPurchases.Location = new Point(36, 287);
-            btnPurchases.Name = "btnPurchases";
-            btnPurchases.Size = new Size(96, 36);
-            btnPurchases.TabIndex = 3;
-            btnPurchases.Text = "Purchases";
-            btnPurchases.UseVisualStyleBackColor = false;
-            btnPurchases.Click += btnPurchases_Click;
             // 
             // btnSales
             // 
@@ -136,6 +123,7 @@
             listBox2.Name = "listBox2";
             listBox2.Size = new Size(120, 154);
             listBox2.TabIndex = 6;
+            listBox2.SelectedIndexChanged += listBox2_SelectedIndexChanged_1;
             // 
             // listBox3
             // 
@@ -271,7 +259,6 @@
         #endregion
 
         private Panel panelMain;
-        private Button btnPurchases;
         private Button btnSales;
         private Button btnInventory;
         private Button btnDashboard;

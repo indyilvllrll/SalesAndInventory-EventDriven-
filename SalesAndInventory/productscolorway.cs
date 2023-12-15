@@ -264,6 +264,11 @@ namespace SalesAndInventory
         {
             SwitchForm(new productsedit());
         }
+
+        private void listBox2_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

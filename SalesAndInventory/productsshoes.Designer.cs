@@ -33,7 +33,6 @@
             addshoes = new Button();
             panelMain = new Panel();
             button1 = new Button();
-            btnPurchases = new Button();
             btnSales = new Button();
             btnInventory = new Button();
             btnDashboard = new Button();
@@ -89,7 +88,6 @@
             // 
             panelMain.BackColor = Color.Sienna;
             panelMain.Controls.Add(button1);
-            panelMain.Controls.Add(btnPurchases);
             panelMain.Controls.Add(btnSales);
             panelMain.Controls.Add(btnInventory);
             panelMain.Controls.Add(btnDashboard);
@@ -101,24 +99,13 @@
             // button1
             // 
             button1.BackColor = Color.Salmon;
-            button1.Location = new Point(36, 349);
+            button1.Location = new Point(36, 287);
             button1.Name = "button1";
             button1.Size = new Size(96, 36);
             button1.TabIndex = 4;
             button1.Text = "Products";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
-            // 
-            // btnPurchases
-            // 
-            btnPurchases.BackColor = Color.SandyBrown;
-            btnPurchases.Location = new Point(36, 287);
-            btnPurchases.Name = "btnPurchases";
-            btnPurchases.Size = new Size(96, 36);
-            btnPurchases.TabIndex = 3;
-            btnPurchases.Text = "Purchases";
-            btnPurchases.UseVisualStyleBackColor = false;
-            btnPurchases.Click += btnPurchases_Click;
             // 
             // btnSales
             // 
@@ -284,7 +271,6 @@
         private Button addshoes;
         private Panel panelMain;
         private Button button1;
-        private Button btnPurchases;
         private Button btnSales;
         private Button btnInventory;
         private Button btnDashboard;

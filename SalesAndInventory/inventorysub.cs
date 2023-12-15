@@ -90,6 +90,59 @@ namespace SalesAndInventory
         }
 
 
+        private void InitializeTextBoxEvents()
+        {
+            // Attach KeyPress event handlers to textboxes to allow only numeric input
+            foreach (Control control in Controls)
+            {
+                if (control is TextBox textBox && textBox.Name.StartsWith("t") && int.TryParse(textBox.Name.Substring(1), out _))
+                {
+                    textBox.KeyPress += TextBox_KeyPress;
+                }
+            }
+        }
+
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow only numeric input
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void UpdateQuantityInStock()
+        {
+            // Get the selected values from the listboxes and textboxes
+            string selectedProductName = listBox1.SelectedItem?.ToString();
+            string selectedColorway = colorwaycmb.GetItemText(colorwaycmb.SelectedItem);
+
+            // Loop through textboxes and add size parameters
+            for (int size = 36; size <= 45; size++)
+            {
+                string textBoxName = "t" + size.ToString();
+                TextBox textBox = Controls.Find(textBoxName, true).FirstOrDefault() as TextBox;
+
+                if (textBox != null && int.TryParse(textBox.Text, out int quantity))
+                {
+                    // Construct the SQL query for each size
+                    string strSQL = $"UPDATE inventory " +
+                                    $"JOIN products_table ON inventory.ProductID = products_table.ProductID " +
+                                    $"JOIN colorway ON inventory.ColorwayID = colorway.ColorwayID " +
+                                    $"JOIN sizes ON inventory.SizeID = sizes.SizeID " +
+                                    $"SET inventory.QuantityInStock = inventory.QuantityInStock + {quantity} " +
+                                    $"WHERE products_table.ProductName = '{selectedProductName}' " +
+                                    $"AND colorway.ColorwayName = '{selectedColorway}' " +
+                                    $"AND sizes.ShoeSize = {size}";
+
+                    PopulateDataGridView();
+                    // Execute the update query for each size
+                    dbConnector.ExecuteQuery(strSQL);
+                }
+            }
+            
+
+        }
 
 
 
@@ -103,7 +156,7 @@ namespace SalesAndInventory
 
         private void btnUpdateStocks_Click(object sender, EventArgs e)
         {
-
+            UpdateQuantityInStock();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -208,6 +261,7 @@ namespace SalesAndInventory
         private void colorwaycmb_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateDataGridView();
+
         }
 
 

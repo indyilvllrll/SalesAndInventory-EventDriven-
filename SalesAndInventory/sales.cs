@@ -1,5 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Data.Common;
+using System.Diagnostics.Metrics;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace SalesAndInventory
 {
@@ -7,7 +10,7 @@ namespace SalesAndInventory
     {
         private Form currentForm;
         private readonly DatabaseConnector dbConnector;
-
+        private static int counter = 1;
         public sales()
         {
             InitializeComponent();
@@ -16,6 +19,7 @@ namespace SalesAndInventory
             dbConnector = new DatabaseConnector("localhost", "shoessalesandinventory1", "shoessalesandinventory", "z7FP[-6kc@ErCAnI");
             PopulateCustomerComboBox();
             PopulateBrandComboBox();
+            ClearAndMoveToNextCustomer();
         }
 
         private void SwitchForm(Form newForm)
@@ -578,7 +582,7 @@ namespace SalesAndInventory
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurredd: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -632,8 +636,379 @@ namespace SalesAndInventory
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurredddd: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void confirmbtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Validate required fields before creating an order
+                if (!ValidateOrderFields())
+                {
+                    return;
+                }
+
+
+
+                // Get other order details from the form
+                string orderDetails = GetOrderDetails();
+
+                // Get customer information from the form
+                int? customerID = GetCustomerID();
+
+                // If the customer does not exist, add a new customer to Customers_tbl
+                if (!customerID.HasValue)
+                {
+                    customerID = AddNewCustomer();
+                }
+
+                // Get Courier and Payment details
+                string selectedCourier = courier.Text;
+                string selectedPayment = payment.Text;
+
+                // Get the current date
+                DateTime orderDate = DateTime.Now;
+
+                // Get the subtotal, discount, and total
+                double subtotal = Convert.ToDouble(subtotaltxtb.Text);
+                // Get the current subtotal
+                double discount = double.TryParse(disc.Text, out discount) ? discount : 0;
+                double total = subtotal - discount;
+
+                // Insert the new order into the Orders_tbl
+                string strSQLOrder = "INSERT INTO orders_table (CustomerID, OrderList, Courier, Payment, OrderDate, Subtotal, Discount, Total, Status) " +
+                                     $"VALUES ({(customerID != null ? customerID.ToString() : "NULL")}, '{orderDetails}', '{selectedCourier}', '{selectedPayment}', " +
+                                     $"'{orderDate.ToString("yyyy-MM-dd HH:mm:ss")}', {subtotal}, {discount}, {total}, 'Processed')";
+
+                using (MySqlCommand command = new MySqlCommand(strSQLOrder, dbConnector.GetConnection()))
+                {
+                    dbConnector.OpenConnection();
+
+                    try
+                    {
+                        // Execute the SQL statement for the Orders_tbl
+                        command.ExecuteNonQuery();
+
+                        // Display a confirmation message or perform other actions
+                        MessageBox.Show("Order created successfully!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                        // Get the max order ID
+                        string maxOrderID = dbConnector.ExecuteQueryScalar<int>("SELECT MAX(OrderID) FROM orders_table").ToString();
+
+
+                        // Update the quantity in Inventory_tblQuery2 and record the event in OrderEvents_tbl
+                        UpdateInventoryAndRecordEvent(maxOrderID);
+
+
+
+
+                        // Execute the SQL statement for the Orders_tbl
+                        command.ExecuteNonQuery();
+
+                        MessageBox.Show("Order created successfully!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                    finally
+                    {
+                        dbConnector.CloseConnection();
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                dbConnector.CloseConnection();
+            }
+        }
+
+        private bool ValidateOrderFields()
+        {
+            // Add your validation logic here
+            // Check if required fields are filled, valid values, etc.
+            // Return true if validation succeeds, false otherwise
+            // Display error messages or alerts as needed
+
+            // Initialize a StringBuilder to concatenate validation messages
+            StringBuilder validationMessages = new StringBuilder();
+
+            // Example validation:
+            if (dataGridView1.Rows.Count == 0)
+            {
+                validationMessages.AppendLine("Please add items to the Order List.");
+            }
+
+            if (string.IsNullOrEmpty(fname.Text))
+            {
+                validationMessages.AppendLine("Please enter First Name.");
+            }
+
+            if (string.IsNullOrEmpty(lname.Text))
+            {
+                validationMessages.AppendLine("Please enter Last Name.");
+            }
+
+            if (string.IsNullOrEmpty(addr.Text))
+            {
+                validationMessages.AppendLine("Please enter Street Address.");
+            }
+
+            if (string.IsNullOrEmpty(cp.Text))
+            {
+                validationMessages.AppendLine("Please enter Contact Number.");
+            }
+
+            if (string.IsNullOrEmpty(city.Text))
+            {
+                validationMessages.AppendLine("Please enter City.");
+            }
+
+            if (string.IsNullOrEmpty(barangay.Text))
+            {
+                validationMessages.AppendLine("Please enter Barangay.");
+            }
+
+            if (string.IsNullOrEmpty(courier.Text))
+            {
+                validationMessages.AppendLine("Please enter Courier.");
+            }
+
+            if (string.IsNullOrEmpty(payment.Text))
+            {
+                validationMessages.AppendLine("Please enter Payment Method.");
+            }
+
+
+
+            // Check if any validation messages were generated
+            if (validationMessages.Length > 0)
+            {
+                // Display a single MessageBox with all validation messages
+                MessageBox.Show(validationMessages.ToString(), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            return true;
+        }
+
+
+        private int GenerateUniqueOrderItemID()
+        {
+            // For simplicity, using a combination of date and random number
+            string uniqueString = $"{DateTime.Now:yyyyMMddhhmmss}-{new Random().Next(1000):D3}";
+
+            // Use a hash function to convert the string to an integer
+            int hash = uniqueString.GetHashCode();
+
+            // Ensure the result is positive
+            return Math.Abs(hash);
+        }
+
+   
+
+        private int? GetCustomerID()
+        {
+            // Get the customer ID based on matching customer details
+            string strSQL = "SELECT CustomerID FROM customers_table " +
+                            "WHERE FirstName = @FirstName AND LastName = @LastName AND StreetAddress = @StreetAddress";
+
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+    {
+        { "@FirstName", fname.Text },
+        { "@LastName", lname.Text },
+        { "@StreetAddress", addr.Text }
+    };
+
+            // Execute the parameterized SQL statement and attempt to convert the result to int
+            object result = dbConnector.ExecuteParameterizedQueryScalar<int?>(strSQL, parameters);
+
+            // Return the result
+            return (int?)result;
+        }
+
+
+        private int? AddNewCustomer()
+        {
+            // Add a new customer to Customers_tbl
+            string strSQLInsertCustomer = $"INSERT INTO customers_table (FirstName, LastName, StreetAddress, Phone, City, Barangay, Landmark) " +
+                                          $"VALUES ('{fname.Text}', '{lname.Text}', '{addr.Text}', '{cp.Text}', '{city.Text}', '{barangay.Text}', '{landmark.Text}')";
+
+            // Execute the SQL statement to insert the new customer
+            dbConnector.ExecuteQuery(strSQLInsertCustomer);
+
+            // Return the newly CustomerID as int?
+            return dbConnector.ExecuteQueryScalar<int?>("SELECT LAST_INSERT_ID()");
+        }
+        private string GetOrderDetails()
+        {
+            // Iterate through the DataGridView rows and concatenate the details
+            StringBuilder orderItemIDs = new StringBuilder();
+            int newOrderItemID = GenerateUniqueOrderItemID();
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow) // Skip the new row if any
+                {
+                    string brand = row.Cells["BrandColumn"].Value?.ToString() ?? "";
+                    string productName = row.Cells["ProductNameColumn"].Value?.ToString() ?? "";
+                    string colorway = row.Cells["ColorwayColumn"].Value?.ToString() ?? "";
+                    int quantity = 0;
+
+                    // Safely convert sizes and quantity
+                    string sizes = row.Cells["SizesColumn"].Value?.ToString() ?? "";
+                    int.TryParse(row.Cells["Quantity"].Value?.ToString(), out quantity);
+
+                    try
+                    {
+
+                        // Insert into OrderItems_tbl with parameterized query
+                        string strSQLInsertOrderItem = "INSERT INTO orderitems_table (GeneratedOrderID, Brand, ProductName, Colorway, Sizes, Quantity) " +
+                                                       "VALUES (@GeneratedOrderID, @Brand, @ProductName, @Colorway, @Sizes, @Quantity)";
+
+                        Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@GeneratedOrderID", newOrderItemID },
+                    { "@Brand", brand },
+                    { "@ProductName", productName },
+                    { "@Colorway", colorway },
+                    { "@Sizes", sizes },
+                    { "@Quantity", quantity }
+                };
+
+                        // Execute the SQL statement to insert the order item
+                        dbConnector.ExecuteParameterizedQuery(strSQLInsertOrderItem, parameters);
+
+
+
+                        // Retrieve the last inserted OrderItemID
+                        object lastOrderItemIDObject = dbConnector.ExecuteParameterizedQueryScalar<object>(
+                            $"SELECT LAST_INSERT_ID();", null);  // Assuming there's no need for parameters here
+
+                        // Convert the result to a string
+                        string lastOrderItemID = lastOrderItemIDObject.ToString();
+
+                        // Concatenate the OrderItemID to the string
+                        if (orderItemIDs.Length > 0)
+                        {
+                            orderItemIDs.Append($",{lastOrderItemID}");
+                        }
+                        else
+                        {
+                            orderItemIDs.Append(lastOrderItemID);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle the exception, log it, or display an error message
+                        MessageBox.Show($"An error occurred while processing order item: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+
+            return orderItemIDs.ToString();
+        }
+
+
+        private void UpdateInventoryAndRecordEvent(string maxOrderID)
+        {
+            // Iterate through the DataGridView rows and update Inventory and record events
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow) // Skip the new row if any
+                {
+                    string brand = row.Cells["BrandColumn"].Value.ToString();
+                    string productName = row.Cells["ProductNameColumn"].Value.ToString();
+                    string colorway = row.Cells["ColorwayColumn"].Value.ToString();
+                    int quantity = Convert.ToInt32(row.Cells["Quantity"].Value);
+                    int size = Convert.ToInt32(row.Cells["SizesColumn"].Value);
+
+                    string strSQL = $"SELECT " +
+                $"    inventory.QuantityInStock " +
+                $"FROM " +
+                $"    inventory " +
+                $"JOIN " +
+                $"    products_table ON inventory.ProductID = products_table.ProductID " +
+                $"JOIN " +
+                $"    colorway ON inventory.ColorwayID = colorway.ColorwayID " +
+                $"JOIN " +
+                $"    sizes ON inventory.SizeID = sizes.SizeID " +
+                $"WHERE " +
+                $"    products_table.ProductName = '{productName}' AND " +
+                $"    colorway.ColorwayName = '{colorway}' AND " +
+                $"    sizes.ShoeSize = {size};";
+
+                    int currentStock = dbConnector.ExecuteQueryScalar<int>(strSQL);
+
+                    // Calculate the new stock without going negative
+                    int newStock = currentStock - quantity;
+
+                    // Ensure the new stock doesn't go below 0
+                    if (newStock < 0)
+                    {
+                        newStock = 0;
+                    }
+
+                    strSQL = $"UPDATE inventory " +
+                                    $"JOIN products_table ON inventory.ProductID = products_table.ProductID " +
+                                    $"JOIN colorway ON inventory.ColorwayID = colorway.ColorwayID " +
+                                    $"JOIN sizes ON inventory.SizeID = sizes.SizeID " +
+                                    $"SET inventory.QuantityInStock = {newStock} " +
+                                    $"WHERE " +
+                                    $"    products_table.ProductName = '{productName}' AND " +
+                                    $"    colorway.ColorwayName = '{colorway}' AND " +
+                                    $"    sizes.ShoeSize = {size};";
+
+                    // Execute the update query
+                    dbConnector.ExecuteQuery(strSQL);
+
+
+                    // Record the event in OrderEvents_tbl
+                    InsertStockUpdate(productName, brand, colorway, size.ToString(), quantity );
+                }
+            }
+        }
+
+        private void InsertStockUpdate(string productName, string brand, string colorway, string sizeID, int quantity)
+        {
+            // Generate a unique note for "Stock Out"
+            string note = "Stock Out";
+
+            // Set the stock status to "Stock Out"
+            string stockStatus = "Stock Out";
+
+            // Get the current date and time
+            DateTime dateCreated = DateTime.Now;
+
+            // Insert into stocksupdate table
+            string strSQLInsertStockUpdate = $"INSERT INTO stocksupdate (ProductName, Brand, ColorwayName, SizeID, Quantity, Notes, StockStatus, DateCreated) " +
+                                             $"VALUES ('{productName}', '{brand}', '{colorway}', '{sizeID}', {quantity}, '{note}', '{stockStatus}', '{dateCreated:yyyy-MM-dd HH:mm:ss}')";
+
+            // Execute the query
+            dbConnector.ExecuteQuery(strSQLInsertStockUpdate);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
+
 }

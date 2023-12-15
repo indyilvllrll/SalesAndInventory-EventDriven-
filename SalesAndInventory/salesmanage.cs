@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,7 +27,9 @@ namespace SalesAndInventory
             currentForm = this;
             currentForm.Show();
             PopulateDataGridView();
-            
+            PopulateDataGridView2();
+
+
 
     }
 
@@ -121,7 +124,28 @@ namespace SalesAndInventory
             }
         }
 
+        private void PopulateDataGridView2()
+        {
+            try
+            {
+                dbConnector.OpenConnection(); // Open the connection using the DatabaseConnector
 
+                string strSQL = "SELECT orders_table.OrderID, orders_table.CustomerID, " +
+                                "customers_table.FirstName, customers_table.LastName, " +
+                                "orders_table.OrderList, orders_table.Courier, orders_table.Payment, " +
+                                "orders_table.Total, orders_table.Status " +
+                                "FROM orders_table " +
+                                "JOIN customers_table ON orders_table.CustomerID = customers_table.CustomerID";
+                MySqlCommand command = new MySqlCommand(strSQL, dbConnector.GetConnection());
+                DataTable dataTable = dbConnector.ExecuteQueryDataTable(strSQL);
+
+                dataGridView2.DataSource = dataTable;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
     }
 }

@@ -30,7 +30,6 @@
         {
             panelMain = new Panel();
             button1 = new Button();
-            btnPurchases = new Button();
             btnSales = new Button();
             btnInventory = new Button();
             btnDashboard = new Button();
@@ -54,42 +53,42 @@
             label2 = new Label();
             button12 = new Button();
             button13 = new Button();
-            textBox6 = new TextBox();
+            t45 = new TextBox();
             button14 = new Button();
             button15 = new Button();
-            textBox7 = new TextBox();
+            t44 = new TextBox();
             button16 = new Button();
             button17 = new Button();
-            textBox8 = new TextBox();
+            t43 = new TextBox();
             button18 = new Button();
             button19 = new Button();
-            textBox9 = new TextBox();
+            t42 = new TextBox();
             button20 = new Button();
             button21 = new Button();
-            textBox10 = new TextBox();
+            t41 = new TextBox();
             button10 = new Button();
             button11 = new Button();
-            textBox5 = new TextBox();
+            t40 = new TextBox();
             button8 = new Button();
             button9 = new Button();
-            textBox4 = new TextBox();
+            t39 = new TextBox();
             button6 = new Button();
             button7 = new Button();
-            textBox3 = new TextBox();
+            t38 = new TextBox();
             button4 = new Button();
             button5 = new Button();
-            textBox2 = new TextBox();
+            t37 = new TextBox();
             button3 = new Button();
             button2 = new Button();
-            textBox1 = new TextBox();
+            t36 = new TextBox();
             btnUpdateStocks = new Button();
             dataGridView1 = new DataGridView();
+            Column1 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
             label12 = new Label();
             label13 = new Label();
             textBox11 = new TextBox();
             label14 = new Label();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
             panelMain.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -99,7 +98,6 @@
             // 
             panelMain.BackColor = Color.Sienna;
             panelMain.Controls.Add(button1);
-            panelMain.Controls.Add(btnPurchases);
             panelMain.Controls.Add(btnSales);
             panelMain.Controls.Add(btnInventory);
             panelMain.Controls.Add(btnDashboard);
@@ -111,24 +109,13 @@
             // button1
             // 
             button1.BackColor = Color.SandyBrown;
-            button1.Location = new Point(36, 348);
+            button1.Location = new Point(36, 286);
             button1.Name = "button1";
             button1.Size = new Size(96, 36);
             button1.TabIndex = 4;
             button1.Text = "Products";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
-            // 
-            // btnPurchases
-            // 
-            btnPurchases.BackColor = Color.SandyBrown;
-            btnPurchases.Location = new Point(36, 287);
-            btnPurchases.Name = "btnPurchases";
-            btnPurchases.Size = new Size(96, 36);
-            btnPurchases.TabIndex = 3;
-            btnPurchases.Text = "Purchases";
-            btnPurchases.UseVisualStyleBackColor = false;
-            btnPurchases.Click += btnPurchases_Click;
             // 
             // btnSales
             // 
@@ -249,34 +236,34 @@
             panel1.Controls.Add(label2);
             panel1.Controls.Add(button12);
             panel1.Controls.Add(button13);
-            panel1.Controls.Add(textBox6);
+            panel1.Controls.Add(t45);
             panel1.Controls.Add(button14);
             panel1.Controls.Add(button15);
-            panel1.Controls.Add(textBox7);
+            panel1.Controls.Add(t44);
             panel1.Controls.Add(button16);
             panel1.Controls.Add(button17);
-            panel1.Controls.Add(textBox8);
+            panel1.Controls.Add(t43);
             panel1.Controls.Add(button18);
             panel1.Controls.Add(button19);
-            panel1.Controls.Add(textBox9);
+            panel1.Controls.Add(t42);
             panel1.Controls.Add(button20);
             panel1.Controls.Add(button21);
-            panel1.Controls.Add(textBox10);
+            panel1.Controls.Add(t41);
             panel1.Controls.Add(button10);
             panel1.Controls.Add(button11);
-            panel1.Controls.Add(textBox5);
+            panel1.Controls.Add(t40);
             panel1.Controls.Add(button8);
             panel1.Controls.Add(button9);
-            panel1.Controls.Add(textBox4);
+            panel1.Controls.Add(t39);
             panel1.Controls.Add(button6);
             panel1.Controls.Add(button7);
-            panel1.Controls.Add(textBox3);
+            panel1.Controls.Add(t38);
             panel1.Controls.Add(button4);
             panel1.Controls.Add(button5);
-            panel1.Controls.Add(textBox2);
+            panel1.Controls.Add(t37);
             panel1.Controls.Add(button3);
             panel1.Controls.Add(button2);
-            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(t36);
             panel1.Location = new Point(418, 212);
             panel1.Name = "panel1";
             panel1.Size = new Size(489, 215);
@@ -400,13 +387,13 @@
             button13.Text = "+";
             button13.UseVisualStyleBackColor = true;
             // 
-            // textBox6
+            // t45
             // 
-            textBox6.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox6.Location = new Point(353, 148);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(42, 24);
-            textBox6.TabIndex = 27;
+            t45.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            t45.Location = new Point(353, 148);
+            t45.Name = "t45";
+            t45.Size = new Size(42, 24);
+            t45.TabIndex = 27;
             // 
             // button14
             // 
@@ -426,13 +413,13 @@
             button15.Text = "+";
             button15.UseVisualStyleBackColor = true;
             // 
-            // textBox7
+            // t44
             // 
-            textBox7.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox7.Location = new Point(353, 118);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(42, 24);
-            textBox7.TabIndex = 24;
+            t44.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            t44.Location = new Point(353, 118);
+            t44.Name = "t44";
+            t44.Size = new Size(42, 24);
+            t44.TabIndex = 24;
             // 
             // button16
             // 
@@ -452,13 +439,13 @@
             button17.Text = "+";
             button17.UseVisualStyleBackColor = true;
             // 
-            // textBox8
+            // t43
             // 
-            textBox8.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox8.Location = new Point(353, 88);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(42, 24);
-            textBox8.TabIndex = 21;
+            t43.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            t43.Location = new Point(353, 88);
+            t43.Name = "t43";
+            t43.Size = new Size(42, 24);
+            t43.TabIndex = 21;
             // 
             // button18
             // 
@@ -478,13 +465,13 @@
             button19.Text = "+";
             button19.UseVisualStyleBackColor = true;
             // 
-            // textBox9
+            // t42
             // 
-            textBox9.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox9.Location = new Point(353, 58);
-            textBox9.Name = "textBox9";
-            textBox9.Size = new Size(42, 24);
-            textBox9.TabIndex = 18;
+            t42.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            t42.Location = new Point(353, 58);
+            t42.Name = "t42";
+            t42.Size = new Size(42, 24);
+            t42.TabIndex = 18;
             // 
             // button20
             // 
@@ -504,13 +491,13 @@
             button21.Text = "+";
             button21.UseVisualStyleBackColor = true;
             // 
-            // textBox10
+            // t41
             // 
-            textBox10.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox10.Location = new Point(353, 28);
-            textBox10.Name = "textBox10";
-            textBox10.Size = new Size(42, 24);
-            textBox10.TabIndex = 15;
+            t41.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            t41.Location = new Point(353, 28);
+            t41.Name = "t41";
+            t41.Size = new Size(42, 24);
+            t41.TabIndex = 15;
             // 
             // button10
             // 
@@ -531,13 +518,13 @@
             button11.Text = "+";
             button11.UseVisualStyleBackColor = true;
             // 
-            // textBox5
+            // t40
             // 
-            textBox5.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox5.Location = new Point(112, 148);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(42, 24);
-            textBox5.TabIndex = 12;
+            t40.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            t40.Location = new Point(112, 148);
+            t40.Name = "t40";
+            t40.Size = new Size(42, 24);
+            t40.TabIndex = 12;
             // 
             // button8
             // 
@@ -557,13 +544,13 @@
             button9.Text = "+";
             button9.UseVisualStyleBackColor = true;
             // 
-            // textBox4
+            // t39
             // 
-            textBox4.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox4.Location = new Point(112, 118);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(42, 24);
-            textBox4.TabIndex = 9;
+            t39.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            t39.Location = new Point(112, 118);
+            t39.Name = "t39";
+            t39.Size = new Size(42, 24);
+            t39.TabIndex = 9;
             // 
             // button6
             // 
@@ -583,13 +570,13 @@
             button7.Text = "+";
             button7.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // t38
             // 
-            textBox3.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox3.Location = new Point(112, 88);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(42, 24);
-            textBox3.TabIndex = 6;
+            t38.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            t38.Location = new Point(112, 88);
+            t38.Name = "t38";
+            t38.Size = new Size(42, 24);
+            t38.TabIndex = 6;
             // 
             // button4
             // 
@@ -609,13 +596,13 @@
             button5.Text = "+";
             button5.UseVisualStyleBackColor = true;
             // 
-            // textBox2
+            // t37
             // 
-            textBox2.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox2.Location = new Point(112, 58);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(42, 24);
-            textBox2.TabIndex = 3;
+            t37.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            t37.Location = new Point(112, 58);
+            t37.Name = "t37";
+            t37.Size = new Size(42, 24);
+            t37.TabIndex = 3;
             // 
             // button3
             // 
@@ -635,13 +622,13 @@
             button2.Text = "+";
             button2.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // t36
             // 
-            textBox1.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(112, 28);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(42, 24);
-            textBox1.TabIndex = 0;
+            t36.Font = new Font("Sitka Small", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            t36.Location = new Point(112, 28);
+            t36.Name = "t36";
+            t36.Size = new Size(42, 24);
+            t36.TabIndex = 0;
             // 
             // btnUpdateStocks
             // 
@@ -664,6 +651,22 @@
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(143, 236);
             dataGridView1.TabIndex = 13;
+            // 
+            // Column1
+            // 
+            Column1.FillWeight = 50F;
+            Column1.HeaderText = "Sizes";
+            Column1.MinimumWidth = 4;
+            Column1.Name = "Column1";
+            Column1.Width = 50;
+            // 
+            // Column2
+            // 
+            Column2.FillWeight = 50F;
+            Column2.HeaderText = "Stocks";
+            Column2.MinimumWidth = 4;
+            Column2.Name = "Column2";
+            Column2.Width = 50;
             // 
             // label12
             // 
@@ -703,22 +706,6 @@
             label14.TabIndex = 17;
             label14.Text = "NOTES";
             // 
-            // Column1
-            // 
-            Column1.FillWeight = 50F;
-            Column1.HeaderText = "Sizes";
-            Column1.MinimumWidth = 4;
-            Column1.Name = "Column1";
-            Column1.Width = 50;
-            // 
-            // Column2
-            // 
-            Column2.FillWeight = 50F;
-            Column2.HeaderText = "Stocks";
-            Column2.MinimumWidth = 4;
-            Column2.Name = "Column2";
-            Column2.Width = 50;
-            // 
             // inventorysub
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -752,7 +739,6 @@
         #endregion
 
         private Panel panelMain;
-        private Button btnPurchases;
         private Button btnSales;
         private Button btnInventory;
         private Button btnDashboard;
@@ -765,7 +751,7 @@
         private Label colorway;
         private Panel panel1;
         private Button btnUpdateStocks;
-        private TextBox textBox1;
+        private TextBox t36;
         private Button button1;
         private Button button12;
         private Button button13;
@@ -784,16 +770,16 @@
         private TextBox textBox10;
         private Button button10;
         private Button button11;
-        private TextBox textBox5;
+        private TextBox t40;
         private Button button8;
         private Button button9;
-        private TextBox textBox4;
+        private TextBox t9;
         private Button button6;
         private Button button7;
-        private TextBox textBox3;
+        private TextBox t8;
         private Button button4;
         private Button button5;
-        private TextBox textBox2;
+        private TextBox t3;
         private Button button3;
         private Button button2;
         private Label label7;
@@ -813,5 +799,13 @@
         private Label label14;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
+        private TextBox t45;
+        private TextBox t44;
+        private TextBox t43;
+        private TextBox t42;
+        private TextBox t41;
+        private TextBox t39;
+        private TextBox t38;
+        private TextBox t37;
     }
 }
