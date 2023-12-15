@@ -1,9 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SalesAndInventory
 {
@@ -12,7 +7,7 @@ namespace SalesAndInventory
     public class DatabaseConnector
     {
         private MySqlConnection connection;
-        private string server, database, uid, password;
+        private readonly string server, database, uid, password;
 
         public DatabaseConnector(string server, string database, string uid, string password)
         {

@@ -33,7 +33,7 @@ namespace SalesAndInventory
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                _ = MessageBox.Show("Error: " + ex.Message);
                 return false;
             }
         }
@@ -47,7 +47,7 @@ namespace SalesAndInventory
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                _ = MessageBox.Show("Error: " + ex.Message);
                 return false;
             }
         }
@@ -62,12 +62,12 @@ namespace SalesAndInventory
             string username = un_tb.Text;
             string password = pw_tb.Text;
 
-            Form1 db = new Form1();
+            Form1 db = new();
 
             if (db.OpenConnection())
             {
                 string query = $"SELECT * FROM login_credentials WHERE username='{username}' AND password='{password}'";
-                MySqlCommand cmd = new MySqlCommand(query, db.GetConnection());
+                MySqlCommand cmd = new(query, db.GetConnection());
 
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
@@ -75,18 +75,18 @@ namespace SalesAndInventory
                 {
                     // Credentials are correct, close the current form and open the dashboard form
                     dataReader.Close();
-                    db.CloseConnection();
+                    _ = db.CloseConnection();
 
-                    this.Hide();  // hide the login form
-                    dashboard dashboardForm = new dashboard();
+                    Hide();  // hide the login form
+                    dashboard dashboardForm = new();
                     dashboardForm.Show();
                 }
                 else
                 {
-                    MessageBox.Show("Invalid Credentials. Please try again.");
+                    _ = MessageBox.Show("Invalid Credentials. Please try again.");
                 }
 
-                db.CloseConnection();
+                _ = db.CloseConnection();
             }
         }
     }

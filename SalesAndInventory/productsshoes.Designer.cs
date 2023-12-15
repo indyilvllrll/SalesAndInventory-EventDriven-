@@ -38,7 +38,18 @@
             btnInventory = new Button();
             btnDashboard = new Button();
             addcolorways = new Button();
+            label1 = new Label();
+            brandcmb = new ComboBox();
+            label2 = new Label();
+            prn = new TextBox();
+            basep = new TextBox();
+            label3 = new Label();
+            retailp = new TextBox();
+            label4 = new Label();
+            savebtn = new Button();
+            dataGridView1 = new DataGridView();
             panelMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // back
@@ -153,11 +164,106 @@
             addcolorways.UseVisualStyleBackColor = false;
             addcolorways.Click += addcolorways_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(434, 230);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 14;
+            label1.Text = "Brand";
+            // 
+            // brandcmb
+            // 
+            brandcmb.FormattingEnabled = true;
+            brandcmb.Location = new Point(526, 227);
+            brandcmb.Name = "brandcmb";
+            brandcmb.Size = new Size(170, 23);
+            brandcmb.TabIndex = 15;
+            brandcmb.SelectedIndexChanged += brandcmb_SelectedIndexChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(434, 271);
+            label2.Name = "label2";
+            label2.Size = new Size(84, 15);
+            label2.TabIndex = 16;
+            label2.Text = "Product Name";
+            // 
+            // prn
+            // 
+            prn.Location = new Point(526, 268);
+            prn.Name = "prn";
+            prn.Size = new Size(170, 23);
+            prn.TabIndex = 17;
+            // 
+            // basep
+            // 
+            basep.Location = new Point(526, 300);
+            basep.Name = "basep";
+            basep.Size = new Size(170, 23);
+            basep.TabIndex = 19;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(434, 303);
+            label3.Name = "label3";
+            label3.Size = new Size(60, 15);
+            label3.TabIndex = 18;
+            label3.Text = "Base Price";
+            // 
+            // retailp
+            // 
+            retailp.Location = new Point(526, 329);
+            retailp.Name = "retailp";
+            retailp.Size = new Size(170, 23);
+            retailp.TabIndex = 21;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(434, 332);
+            label4.Name = "label4";
+            label4.Size = new Size(65, 15);
+            label4.TabIndex = 20;
+            label4.Text = "Retail Price";
+            // 
+            // savebtn
+            // 
+            savebtn.Location = new Point(515, 406);
+            savebtn.Name = "savebtn";
+            savebtn.Size = new Size(121, 23);
+            savebtn.TabIndex = 22;
+            savebtn.Text = "ADD SHOES";
+            savebtn.UseVisualStyleBackColor = true;
+            savebtn.Click += savebtn_Click;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(322, 458);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.Size = new Size(489, 189);
+            dataGridView1.TabIndex = 23;
+            // 
             // productsshoes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1154, 659);
+            Controls.Add(dataGridView1);
+            Controls.Add(savebtn);
+            Controls.Add(retailp);
+            Controls.Add(label4);
+            Controls.Add(basep);
+            Controls.Add(label3);
+            Controls.Add(prn);
+            Controls.Add(label2);
+            Controls.Add(brandcmb);
+            Controls.Add(label1);
             Controls.Add(back);
             Controls.Add(editexisting);
             Controls.Add(addshoes);
@@ -166,7 +272,9 @@
             Name = "productsshoes";
             Text = "addnewshoes";
             panelMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -181,5 +289,15 @@
         private Button btnInventory;
         private Button btnDashboard;
         private Button addcolorways;
+        private Label label1;
+        private ComboBox brandcmb;
+        private Label label2;
+        private TextBox prn;
+        private TextBox basep;
+        private Label label3;
+        private TextBox retailp;
+        private Label label4;
+        private Button savebtn;
+        private DataGridView dataGridView1;
     }
 }

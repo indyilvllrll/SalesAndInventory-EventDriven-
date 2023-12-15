@@ -37,6 +37,12 @@
             editexisting = new Button();
             addshoes = new Button();
             addcolorways = new Button();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
+            listBox3 = new ListBox();
+            listBox2 = new ListBox();
+            listBox1 = new ListBox();
             panelMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -141,11 +147,71 @@
             addcolorways.UseVisualStyleBackColor = false;
             addcolorways.Click += addcolorways_Click;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(816, 187);
+            label3.Name = "label3";
+            label3.Size = new Size(128, 15);
+            label3.TabIndex = 16;
+            label3.Text = "EXISTING COLORWAYS";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(563, 174);
+            label2.Name = "label2";
+            label2.Size = new Size(43, 15);
+            label2.TabIndex = 15;
+            label2.Text = "SHOES";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(278, 187);
+            label1.Name = "label1";
+            label1.Size = new Size(46, 15);
+            label1.TabIndex = 14;
+            label1.Text = "BRAND";
+            // 
+            // listBox3
+            // 
+            listBox3.FormattingEnabled = true;
+            listBox3.ItemHeight = 15;
+            listBox3.Location = new Point(824, 231);
+            listBox3.Name = "listBox3";
+            listBox3.Size = new Size(120, 154);
+            listBox3.TabIndex = 13;
+            // 
+            // listBox2
+            // 
+            listBox2.FormattingEnabled = true;
+            listBox2.ItemHeight = 15;
+            listBox2.Location = new Point(526, 231);
+            listBox2.Name = "listBox2";
+            listBox2.Size = new Size(120, 154);
+            listBox2.TabIndex = 12;
+            // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(271, 231);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(120, 154);
+            listBox1.TabIndex = 11;
+            // 
             // products
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1154, 659);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(listBox3);
+            Controls.Add(listBox2);
+            Controls.Add(listBox1);
             Controls.Add(editexisting);
             Controls.Add(addshoes);
             Controls.Add(panelMain);
@@ -154,6 +220,7 @@
             Text = "products";
             panelMain.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -167,5 +234,11 @@
         private Button editexisting;
         private Button addshoes;
         private Button addcolorways;
+        private Label label3;
+        private Label label2;
+        private Label label1;
+        private ListBox listBox3;
+        private ListBox listBox2;
+        private ListBox listBox1;
     }
 }

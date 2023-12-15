@@ -1,15 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 
 namespace SalesAndInventory
@@ -31,7 +21,7 @@ namespace SalesAndInventory
         private void Initialize()
         {
             server = "localhost";
-            database = "shoessalesandinventory";
+            database = "shoessalesandinventory1";
             uid = "shoessalesandinventory";
             password = "z7FP[-6kc@ErCAnI";
 
@@ -53,7 +43,7 @@ namespace SalesAndInventory
         {
             if (connection is null || connection.State != ConnectionState.Open)
             {
-                MessageBox.Show("Database connection is not open.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show("Database connection is not open.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -76,35 +66,31 @@ namespace SalesAndInventory
 
             try
             {
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
-                    {
-                        DataTable dataTable = new();
-                        adapter.Fill(dataTable);
+                using MySqlCommand command = new(query, connection);
+                using MySqlDataAdapter adapter = new(command);
+                DataTable dataTable = new();
+                _ = adapter.Fill(dataTable);
 
 
-                        // Auto-generate columns based on the DataTable
-                        dataGridView1.AutoGenerateColumns = true;
+                // Auto-generate columns based on the DataTable
+                dataGridView1.AutoGenerateColumns = true;
 
-                        // Set the DataSource directly to the DataTable
-                        dataGridView1.DataSource = dataTable;
+                // Set the DataSource directly to the DataTable
+                dataGridView1.DataSource = dataTable;
 
-                        // Refresh the DataGridView
-                        dataGridView1.Refresh();
-                    }
-                }
+                // Refresh the DataGridView
+                dataGridView1.Refresh();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show($"Error loading data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void SwitchForm(Form newForm)
         {
             // Set the location of the new form to match the main form
-            newForm.Location = this.Location;
+            newForm.Location = Location;
 
             // Hide the current form
             currentForm.Hide();
@@ -144,9 +130,11 @@ namespace SalesAndInventory
 
         private void btnUpdateStocks_Click(object sender, EventArgs e)
         {
-            this.Hide();  // hide the login form
-            inventorysub inventorysubForm = new inventorysub();
-            inventorysubForm.Location = this.Location;
+            Hide();  // hide the login form
+            inventorysub inventorysubForm = new()
+            {
+                Location = Location
+            };
             inventorysubForm.Show();
         }
 
@@ -154,5 +142,24 @@ namespace SalesAndInventory
         {
             SwitchForm(new products());
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

@@ -1,25 +1,16 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SalesAndInventory
 {
     public partial class inventorysub : Form
     {
         private Form currentForm;
-        private DatabaseConnector dbConnector;
+        private readonly DatabaseConnector dbConnector;
 
         public inventorysub()
         {
             InitializeComponent();
-            dbConnector = new DatabaseConnector("localhost", "shoessalesandinventory", "shoessalesandinventory", "z7FP[-6kc@ErCAnI");
+            dbConnector = new DatabaseConnector("localhost", "shoessalesandinventory1", "shoessalesandinventory", "z7FP[-6kc@ErCAnI");
             // Initialize the currentForm with the initial form 
             currentForm = this;
             currentForm.Show();
@@ -31,7 +22,7 @@ namespace SalesAndInventory
         private void SwitchForm(Form newForm)
         {
             // Set the location of the new form to match the main form
-            newForm.Location = this.Location;
+            newForm.Location = Location;
 
             // Hide the current form
             currentForm.Hide();
@@ -44,9 +35,11 @@ namespace SalesAndInventory
         }
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Hide();  // hide the login form
-            inventory inventoryForm = new inventory();
-            inventoryForm.Location = this.Location;
+            Hide();  // hide the login form
+            inventory inventoryForm = new()
+            {
+                Location = Location
+            };
             inventoryForm.Show();
         }
 
@@ -73,25 +66,22 @@ namespace SalesAndInventory
 
         private void PopulateComboBox()
         {
+
             try
             {
                 string query = "SELECT DISTINCT Brand FROM products_table";
-                using (MySqlCommand command = new MySqlCommand(query, dbConnector.GetConnection()))
+                using MySqlCommand command = new(query, dbConnector.GetConnection());
+                dbConnector.OpenConnection();
+                using MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    dbConnector.OpenConnection();
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            string selectedBrand = reader["Brand"].ToString();
-                            comboBox1.Items.Add(selectedBrand);
-                        }
-                    }
+                    string selectedBrand = reader["Brand"].ToString();
+                    _ = comboBox1.Items.Add(selectedBrand);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -120,6 +110,7 @@ namespace SalesAndInventory
         {
             // Clear existing items in the ListBox
             listBox1.Items.Clear();
+            colorwaycmb.SelectedIndex = -1;
 
             // Get the selected item from the ComboBox
             string selectedBrand = comboBox1.SelectedItem?.ToString();
@@ -133,26 +124,23 @@ namespace SalesAndInventory
 
         private void PopulateListBox(string selectedBrand)
         {
+            colorwaycmb.Items.Clear();
             try
             {
                 // Modify the query based on your database structure
                 string query = $"SELECT ProductName FROM products_table WHERE Brand = '{selectedBrand}'";
-                using (MySqlCommand command = new MySqlCommand(query, dbConnector.GetConnection()))
+                using MySqlCommand command = new(query, dbConnector.GetConnection());
+                dbConnector.OpenConnection();
+                using MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    dbConnector.OpenConnection();
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            string productName = reader["ProductName"].ToString();
-                            listBox1.Items.Add(productName);
-                        }
-                    }
+                    string productName = reader["ProductName"].ToString();
+                    _ = listBox1.Items.Add(productName);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -167,6 +155,8 @@ namespace SalesAndInventory
 
             // Update the shoesLabel with the selected product
             shoeslabel.Text = selectedProduct;
+            colorwaycmb.Text = "";
+
 
             // Populate the colorwayComboBox based on the selected product
             PopulateColorwayComboBox(selectedProduct);
@@ -176,6 +166,8 @@ namespace SalesAndInventory
 
         private void PopulateColorwayComboBox(string selectedProduct)
         {
+            colorwaycmb.Items.Clear();
+            colorwaycmb.Text = "";
             try
             {
                 // Modify the query based on your database structure
@@ -184,22 +176,18 @@ namespace SalesAndInventory
                                $"JOIN colorway ON inventory.ColorwayID = colorway.ColorwayID " +
                                $"WHERE products_table.ProductName = '{selectedProduct}';";
 
-                using (MySqlCommand command = new MySqlCommand(query, dbConnector.GetConnection()))
+                using MySqlCommand command = new(query, dbConnector.GetConnection());
+                dbConnector.OpenConnection();
+                using MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    dbConnector.OpenConnection();
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            string colorwayName = reader["ColorwayName"].ToString();
-                            colorwaycmb.Items.Add(colorwayName);
-                        }
-                    }
+                    string colorwayName = reader["ColorwayName"].ToString();
+                    _ = colorwaycmb.Items.Add(colorwayName);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -211,6 +199,83 @@ namespace SalesAndInventory
         {
             SwitchForm(new products());
         }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void colorwaycmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateDataGridView();
+        }
+
+
+
+        private void PopulateDataGridView()
+        {
+            try
+            {
+                // Clear existing data in the DataGridView
+                dataGridView1.Rows.Clear();
+
+                // Get the selected product name and colorway
+                string productName = shoeslabel.Text;
+                string colorwayName = colorwaycmb.SelectedItem.ToString();
+
+                // SQL query to retrieve ShoeSize and QuantityInStock
+                string query = @"SELECT sizes.ShoeSize, inventory.QuantityInStock
+                         FROM inventory
+                         JOIN products_table ON inventory.ProductID = products_table.ProductID
+                         JOIN colorway ON inventory.ColorwayID = colorway.ColorwayID
+                         JOIN sizes ON inventory.SizeID = sizes.SizeID
+                         WHERE products_table.ProductName = @productName
+                         AND colorway.ColorwayName = @colorwayName";
+
+                using MySqlCommand command = new(query, dbConnector.GetConnection());
+                // Add parameters to the query
+                _ = command.Parameters.AddWithValue("@productName", productName);
+                _ = command.Parameters.AddWithValue("@colorwayName", colorwayName);
+
+                // Open the database connection
+                dbConnector.OpenConnection();
+
+                using MySqlDataReader reader = command.ExecuteReader();
+                // Check if there are rows returned
+                if (reader.HasRows)
+                {
+                    // Loop through the result set and populate the DataGridView
+                    while (reader.Read())
+                    {
+                        string shoeSize = reader["ShoeSize"].ToString();
+                        int quantityInStock = Convert.ToInt32(reader["QuantityInStock"]);
+
+                        // Add a new row to the DataGridView
+                        _ = dataGridView1.Rows.Add(shoeSize, quantityInStock);
+                    }
+                }
+                else
+                {
+                    _ = MessageBox.Show("No data found.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                _ = MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // Close the database connection
+                dbConnector.CloseConnection();
+            }
+        }
+
+
+
+
+
+
+
     }
 
 

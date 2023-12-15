@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace SalesAndInventory
+﻿namespace SalesAndInventory
 {
     public partial class purchases : Form
     {
@@ -24,7 +14,7 @@ namespace SalesAndInventory
         private void SwitchForm(Form newForm)
         {
             // Center the new form relative to the main form
-            newForm.Location = this.Location;
+            newForm.Location = Location;
 
 
             // Set the main form as the owner of the new form

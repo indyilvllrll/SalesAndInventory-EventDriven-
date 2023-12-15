@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace SalesAndInventory
+﻿namespace SalesAndInventory
 {
     public partial class products : Form
     {
         private Form currentForm;
-        private DatabaseConnector dbConnector;
+        private readonly DatabaseConnector dbConnector;
         public products()
         {
             InitializeComponent();
@@ -25,7 +15,7 @@ namespace SalesAndInventory
         private void SwitchForm(Form newForm)
         {
             // Set the location of the new form to match the main form
-            newForm.Location = this.Location;
+            newForm.Location = Location;
 
             // Hide the current form
             currentForm.Hide();
