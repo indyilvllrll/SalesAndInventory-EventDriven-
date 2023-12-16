@@ -28,10 +28,10 @@ namespace SalesAndInventory
             currentForm.Show();
             PopulateDataGridView();
             PopulateDataGridView2();
+            dataGridView2.CellEndEdit += dataGridView2_CellEndEdit;
 
 
-
-    }
+        }
 
         private void SwitchForm(Form newForm)
         {
@@ -147,5 +147,35 @@ namespace SalesAndInventory
             }
         }
 
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+        private void dataGridView2_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            // Update the database when a cell is edited
+            try
+            {
+              
+                    dbConnector.OpenConnection(); 
+
+                    string updateQuery = "UPDATE orders_table SET CustomerName = @CustomerName, OrderDate = @OrderDate WHERE OrderID = @OrderID";
+
+                MySqlCommand updateCommand = new MySqlCommand(updateQuery, dbConnector.GetConnection());
+                {
+                    // Replace these parameters with the actual column names in your table
+                    updateCommand.Parameters.AddWithValue("@CustomerName", dataGridView2.Rows[e.RowIndex].Cells["CustomerName"].Value);
+                        updateCommand.Parameters.AddWithValue("@OrderDate", dataGridView2.Rows[e.RowIndex].Cells["OrderDate"].Value);
+                        updateCommand.Parameters.AddWithValue("@OrderID", dataGridView2.Rows[e.RowIndex].Cells["OrderID"].Value);
+
+                        updateCommand.ExecuteNonQuery();
+                    }
+                }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error updating database: " + ex.Message);
+            }
+        
+        }
     }
 }

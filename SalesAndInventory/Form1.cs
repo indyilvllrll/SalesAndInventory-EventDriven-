@@ -22,6 +22,8 @@ namespace SalesAndInventory
 
             string connectionString = $"SERVER={server};DATABASE={database};UID={uid};PASSWORD={password};";
             connection = new MySqlConnection(connectionString);
+            pw_tb.UseSystemPasswordChar = true;
+            pw_tb.PasswordChar = '*';
         }
 
         public bool OpenConnection()
@@ -78,8 +80,8 @@ namespace SalesAndInventory
                     _ = db.CloseConnection();
 
                     Hide();  // hide the login form
-                    dashboard dashboardForm = new();
-                    dashboardForm.Show();
+                    dashboard inventory = new();
+                    inventory.Show();
                 }
                 else
                 {
@@ -88,6 +90,11 @@ namespace SalesAndInventory
 
                 _ = db.CloseConnection();
             }
+        }
+
+        private void pw_tb_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

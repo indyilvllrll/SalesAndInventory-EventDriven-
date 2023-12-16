@@ -145,6 +145,7 @@
             dataGridView2.RowTemplate.Height = 25;
             dataGridView2.Size = new Size(738, 312);
             dataGridView2.TabIndex = 1;
+            dataGridView2.CellContentClick += dataGridView2_CellContentClick;
             // 
             // tabPage1
             // 

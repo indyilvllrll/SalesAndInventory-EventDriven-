@@ -59,8 +59,10 @@
             pw_tb.BackColor = Color.FromArgb(255, 192, 192);
             pw_tb.Location = new Point(461, 298);
             pw_tb.Name = "pw_tb";
+            pw_tb.PasswordChar = '*';
             pw_tb.Size = new Size(236, 23);
             pw_tb.TabIndex = 2;
+            pw_tb.TextChanged += pw_tb_TextChanged;
             // 
             // label1
             // 
